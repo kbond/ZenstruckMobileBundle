@@ -8,10 +8,14 @@ namespace Zenstruck\Bundle\MobileBundle\Manager;
 class MobileManager
 {
     protected $mobile;
+    protected $mobileHost;
+    protected $defaultHost;
 
-    public function __construct()
+    public function __construct($mobileHost = null, $defaultHost = null, $mobile = false)
     {
-        $this->mobile = false;
+        $this->defaultHost = $defaultHost;
+        $this->mobileHost = $mobileHost;
+        $this->mobile = $mobile;
     }
 
     /**
@@ -36,10 +40,37 @@ class MobileManager
     }
 
     /**
-     * @param string/boolean $value The name of the mobile device or true/false for generic mobile
+     * @param string/boolean $mobile The name of the mobile device or true/false for generic mobile
      */
-    public function setMobile($value = true)
+    public function setMobile($mobile = true)
     {
-        $this->mobile = $value;
+        if (!is_bool($mobile)) {
+            // make sure is valid
+            if (!preg_match("/^[a-zA-Z0-9_]*$/", $mobile)) {
+                throw new \InvalidArgumentException('Invalid mobile name - must be alpha-numeric with no spaces');
+            }
+        }
+
+        $this->mobile = $mobile;
+    }
+
+    public function getMobileHost()
+    {
+        return $this->mobileHost;
+    }
+
+    public function setMobileHost($mobileHost)
+    {
+        $this->mobileHost = $mobileHost;
+    }
+
+    public function getDefaultHost()
+    {
+        return $this->defaultHost;
+    }
+
+    public function setDefaultHost($defaultHost)
+    {
+        $this->defaultHost = $defaultHost;
     }
 }
