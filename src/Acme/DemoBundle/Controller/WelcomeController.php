@@ -3,15 +3,18 @@
 namespace Acme\DemoBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class WelcomeController extends Controller
 {
     public function indexAction()
     {
-        //die(var_dump($_SERVER));
+        $mobile = $this->container->get('zenstruck_mobile.manager')->getMobile();
 
-        die(var_dump($this->container->getParameter('zenstruck_mobile')));
+        $response = new Response();
+        $response->setContent($this->renderView('AcmeDemoBundle:Welcome:index.html.twig', array('mobile' => $mobile)));
+        $response->setSharedMaxAge(30);
 
-        return $this->render('AcmeDemoBundle:Welcome:index.html.twig');
+        return $response;
     }
 }

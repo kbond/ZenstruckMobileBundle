@@ -1,0 +1,3 @@
+[submodule "src/Zenstruck/Bundle/MobileBundle"]
+	path = src/Zenstruck/Bundle/MobileBundle
+	url = git@github.com:kbond/ZenstruckMobileBundle.git

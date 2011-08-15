@@ -2,6 +2,10 @@ imports:
     - { resource: parameters.ini }
     - { resource: security.yml }
 
+zenstruck_mobile:
+    default_host: mobile-sandbox.local
+    mobile_host: m.mobile-sandbox.local
+
 framework:
     #esi:             ~
     #translator:      { fallback: en }

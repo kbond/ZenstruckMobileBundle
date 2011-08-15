@@ -6,6 +6,13 @@
 
 {% block content %}
     <h1>Welcome!</h1>
+    <h2>
+        {% if mobile %}
+        {{ mobile }}
+        {% else %}
+        (Not Mobile)
+        {% endif %}
+    </h2>
 
     <p>Congratulations! You have successfully installed a new Symfony application.</p>
 
