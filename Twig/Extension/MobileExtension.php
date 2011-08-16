@@ -3,6 +3,7 @@
 namespace Zenstruck\Bundle\MobileBundle\Twig\Extension;
 
 use Zenstruck\Bundle\MobileBundle\Manager\MobileManager;
+use Symfony\Component\DependencyInjection\Container;
 
 /**
  * @author Kevin Bond <kevinbond@gmail.com>
@@ -10,11 +11,11 @@ use Zenstruck\Bundle\MobileBundle\Manager\MobileManager;
 class MobileExtension extends \Twig_Extension
 {
 
-    protected $mobileManager;
+    protected $container;
 
-    public function __construct(MobileManager $mobileManager)
+    public function __construct(Container $container)
     {
-        $this->mobileManager = $mobileManager;
+        $this->container = $container;
     }
 
     public function getFunctions()
@@ -25,22 +26,20 @@ class MobileExtension extends \Twig_Extension
         );
     }
 
-    public function getMobileUrl($prefix = 'http://')
+    public function getMobileUrl($parameters = array(), $prefix = 'http://')
     {
-        /**
-         * Have to use $_SERVER instead of Request because of scope issue
-         * @todo find better solution
-         */
-        return $prefix .
-               $this->mobileManager->getMobileHost() .
-               $_SERVER['REQUEST_URI'];
+        return $this->buildUrl(
+                $this->container->get('zenstruck_mobile.manager')->getMobileHost(),
+                $parameters,
+                $prefix);
     }
 
-    public function getFullUrl($prefix = 'http://')
+    public function getFullUrl($parameters = array(), $prefix = 'http://')
     {
-        return $prefix .
-               $this->mobileManager->getFullHost() .
-               $_SERVER['REQUEST_URI'];
+        return $this->buildUrl(
+                $this->container->get('zenstruck_mobile.manager')->getFullHost(),
+                $parameters,
+                $prefix);
     }
 
     /**
@@ -49,6 +48,28 @@ class MobileExtension extends \Twig_Extension
     public function getName()
     {
         return 'zenstruck_mobile';
+    }
+
+    protected function buildUrl($host, array $parameters, $prefix)
+    {
+        /* @var $request Symfony\Component\HttpFoundation\Request */
+        $request = $this->container->get('request')->duplicate();
+        $url = $prefix . $host . $request->getBaseUrl() . $request->getPathInfo();
+
+        $request->query->add($parameters);
+
+        if (count($request->query->keys())) {
+            $url .= '?';
+            $tmp = array();
+
+            foreach ($request->query->all() as $key => $value) {
+                $tmp[] = $key . '=' . $value;
+            }
+            
+            $url .= implode('&', $tmp);
+        }
+
+        return $url;
     }
 
 }

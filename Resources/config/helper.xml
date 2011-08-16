@@ -12,7 +12,7 @@
         <service id="zenstruck_mobile.twig.extension" class="%zenstruck_mobile.twig.extension.class%">
             <tag name="twig.extension" alias="zenstruck_mobile" />
 
-            <argument type="service" id="zenstruck_mobile.manager" />
+            <argument type="service" id="service_container" />
         </service>
     </services>
 </container>
