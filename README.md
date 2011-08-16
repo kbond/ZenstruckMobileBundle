@@ -71,10 +71,10 @@ Use them in your twig templates as follows:
 ### Examples
 
     {# generate mobile url and set a ?mobile=true parameter #}
-    {{ zenstruck_mobile_url({'mobile': true}) }}
+    {{ zenstruck_mobile_url({'mobile': 1}) }}
 
     {# generate full url, set a ?mobile=true parameter and set the prefix to https:// #}
-    {{ zenstruck_mobile_full_url({'mobile': false, 'prefix': 'https://'}) }}
+    {{ zenstruck_mobile_full_url({'mobile': 0, 'prefix': 'https://'}) }}
 
 ### Suggested Usage
 
@@ -106,7 +106,7 @@ Enable/Disable the custom twig engine in your config.yml:
     zenstruck_mobile:
         use_twig_engine: true/false
 
-## Full Default Configuration
+# Full Default Configuration
 
     zenstruck_mobile:
         mobile: false
@@ -115,6 +115,46 @@ Enable/Disable the custom twig engine in your config.yml:
         use_twig_engine: false
         full_host: ~ # Required
         mobile_host: ~ # Required
+
+# Reference
+
+Possible settings for ``.htaccess`` to handle mobile detection and redirect.  This
+also allows a mobile device to *override* the redirect if a cookie is set.  See the
+**Twig Helper** example above to see how to set the ``mobile`` parameter.
+
+    <IfModule mod_rewrite.c>
+        RewriteBase /
+        RewriteEngine On
+
+        # Check if mobile=1 is set and set cookie 'mobile' equal to 1
+        RewriteCond %{QUERY_STRING} (^|&)mobile=1(&|$)
+        RewriteRule ^ - [CO=mobile:1:%{HTTP_HOST}]
+
+        # Check if mobile=0 is set and set cookie 'mobile' equal to 0
+        RewriteCond %{QUERY_STRING} (^|&)mobile=0(&|$)
+        RewriteRule ^ - [CO=mobile:0:%{HTTP_HOST}]
+
+        # cookie can't be set and read in the same request so check
+        RewriteCond %{QUERY_STRING} (^|&)mobile=0(&|$)
+        RewriteRule ^ - [S=1]
+
+        # Check if this looks like a mobile device
+        RewriteCond %{HTTP:x-wap-profile} !^$ [OR]
+        RewriteCond %{HTTP_USER_AGENT} "android|blackberry|ipad|iphone|ipod|iemobile|opera mobile|palmos|webos|googlebot-mobile" [NC,OR]
+        RewriteCond %{HTTP:Profile}       !^$
+
+        # Check if we're not already on the mobile site
+        RewriteCond %{HTTP_HOST}          !^m\.
+        # Check to make sure we haven't set the cookie before
+        RewriteCond %{HTTP:Cookie}        !\mobile=0(;|$)
+        # Now redirect to the mobile site
+        RewriteRule ^ http://m.example.com%{REQUEST_URI} [R,L]
+
+        # Symfony
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteRule ^(.*)$ app.php [QSA,L]
+    </IfModule>
+
 
 #TODO
 
