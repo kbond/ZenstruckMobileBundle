@@ -13,11 +13,13 @@ class WelcomeController extends Controller
 
         $response = new Response();
 
-        if ($this->get('templating')->exists('AcmeDemoBundle:Welcome:mobile\index.html.twig') && $mobile) {
+        /*if ($this->get('templating')->exists('AcmeDemoBundle:Welcome:mobile\index.html.twig') && $mobile) {
             $response->setContent($this->renderView('AcmeDemoBundle:Welcome:mobile\index.html.twig', array('mobile' => $mobile)));
         } else {
             $response->setContent($this->renderView('AcmeDemoBundle:Welcome:index.html.twig', array('mobile' => $mobile)));
-        }
+        }*/
+
+        $response->setContent($this->renderView('AcmeDemoBundle:Welcome:index.html.twig', array('mobile' => $mobile)));
 
         $response->setSharedMaxAge(30);
 

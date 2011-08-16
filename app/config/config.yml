@@ -3,8 +3,9 @@ imports:
     - { resource: security.yml }
 
 zenstruck_mobile:
-    default_host: mobile-sandbox.local
+    full_host: mobile-sandbox.local
     mobile_host: m.mobile-sandbox.local
+    use_twig_engine: true
 
 framework:
     #esi:             ~
