@@ -10,9 +10,9 @@
 
     <services>
         <service id="zenstruck_mobile.manager" class="%zenstruck_mobile.manager.class%">
-            <argument />
-            <argument />
-            <argument>false</argument>
+            <argument /> <!-- mobileHost -->
+            <argument /> <!-- fullHost -->
+            <argument /> <!-- mobile -->
         </service>
     </services>
 </container>

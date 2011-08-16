@@ -9,11 +9,11 @@ class MobileManager
 {
     protected $mobile;
     protected $mobileHost;
-    protected $defaultHost;
+    protected $fullHost;
 
-    public function __construct($mobileHost = null, $defaultHost = null, $mobile = false)
+    public function __construct($mobileHost = null, $fullHost = null, $mobile = false)
     {
-        $this->defaultHost = $defaultHost;
+        $this->fullHost = $fullHost;
         $this->mobileHost = $mobileHost;
         $this->mobile = $mobile;
     }
@@ -64,13 +64,13 @@ class MobileManager
         $this->mobileHost = $mobileHost;
     }
 
-    public function getDefaultHost()
+    public function getFullHost()
     {
-        return $this->defaultHost;
+        return $this->fullHost;
     }
 
-    public function setDefaultHost($defaultHost)
+    public function setFullHost($defaultHost)
     {
-        $this->defaultHost = $defaultHost;
+        $this->fullHost = $defaultHost;
     }
 }

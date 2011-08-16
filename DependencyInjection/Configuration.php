@@ -22,8 +22,11 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('default_host')->isRequired()->end()
-                ->scalarNode('mobile_host')->defaultNull()->end()
+                ->booleanNode('mobile')->defaultFalse()->end()
+                ->booleanNode('use_listener')->defaultTrue()->end()
+                ->booleanNode('use_helper')->defaultTrue()->end()
+                ->scalarNode('full_host')->isRequired()->end()
+                ->scalarNode('mobile_host')->isRequired()->end()
             ->end()
         ;
 

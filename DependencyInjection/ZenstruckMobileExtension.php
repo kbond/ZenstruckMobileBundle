@@ -24,10 +24,18 @@ class ZenstruckMobileExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('manager.xml');
-        $loader->load('listener.xml');
+
+        if ($config['use_helper']) {
+            $loader->load('helper.xml');
+        }
+
+        if ($config['use_listener']) {
+            $loader->load('listener.xml');
+        }
 
         $container->getDefinition('zenstruck_mobile.manager')
                 ->replaceArgument(0, $config['mobile_host'])
-                ->replaceArgument(1, $config['default_host']);
+                ->replaceArgument(1, $config['full_host'])
+                ->replaceArgument(2, $config['mobile']);
     }
 }
