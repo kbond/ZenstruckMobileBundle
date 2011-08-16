@@ -25,6 +25,7 @@ class Configuration implements ConfigurationInterface
                 ->booleanNode('mobile')->defaultFalse()->end()
                 ->booleanNode('use_listener')->defaultTrue()->end()
                 ->booleanNode('use_helper')->defaultTrue()->end()
+                ->booleanNode('use_twig_engine')->defaultFalse()->end()
                 ->scalarNode('full_host')->isRequired()->end()
                 ->scalarNode('mobile_host')->isRequired()->end()
             ->end()

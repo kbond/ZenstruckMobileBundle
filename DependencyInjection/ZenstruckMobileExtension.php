@@ -33,6 +33,10 @@ class ZenstruckMobileExtension extends Extension
             $loader->load('listener.xml');
         }
 
+        if ($config['use_twig_engine']) {
+            $loader->load('twig.xml');
+        }
+
         $container->getDefinition('zenstruck_mobile.manager')
                 ->replaceArgument(0, $config['mobile_host'])
                 ->replaceArgument(1, $config['full_host'])

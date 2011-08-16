@@ -22,8 +22,14 @@ class MobileExtension extends \Twig_Extension
     {
         return array(
             'zenstruck_mobile_url' => new \Twig_Function_Method($this, 'getMobileUrl', array('is_safe' => array('html'))),
-            'zenstruck_mobile_full_url' => new \Twig_Function_Method($this, 'getFullUrl', array('is_safe' => array('html')))
+            'zenstruck_mobile_full_url' => new \Twig_Function_Method($this, 'getFullUrl', array('is_safe' => array('html'))),
+            'zenstruck_mobile_is_mobile' => new \Twig_Function_Method($this, 'isMobile', array('is_safe' => array('html')))
         );
+    }
+
+    public function isMobile()
+    {
+        return $this->container->get('zenstruck_mobile.manager')->isMobile();
     }
 
     public function getMobileUrl($parameters = array(), $prefix = 'http://')
@@ -65,7 +71,7 @@ class MobileExtension extends \Twig_Extension
             foreach ($request->query->all() as $key => $value) {
                 $tmp[] = $key . '=' . $value;
             }
-            
+
             $url .= implode('&', $tmp);
         }
 
