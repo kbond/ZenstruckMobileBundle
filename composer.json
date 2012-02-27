@@ -1,0 +1,21 @@
+{
+    "name": "zenstruck/mobile-bundle",
+    "description": "Tools for managing a mobile version of your Symfony2 application",
+    "keywords": ["mobile"],
+    "homepage": "http://zenstruck.com/project/ZenstruckMobileBundle",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kevin Bond",
+            "email": "kevinbond@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/framework-bundle": "2.*"
+    },
+    "autoload": {
+        "psr-0": { "Zenstruck\\Bundle\\MobileBundle": "" }
+    },
+    "target-dir": "Zenstruck/Bundle/MobileBundle"
+}
