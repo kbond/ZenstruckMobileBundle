@@ -2,6 +2,41 @@
 
 Adds various tools to help with mobile development in Symfony2.
 
+## Installation
+
+1. Add the following lines in your `deps` file:
+
+        [ZenstruckMobileBundle]
+            git=git://github.com/kbond/ZenstruckMobileBundle.git
+            target=bundles/Zenstruck/Bundle/MobileBundle
+            
+2. Add the `Zenstruck` namespace to your autoloader:
+
+    ```php
+    <?php
+    // app/autoload.php
+    
+    $loader->registerNamespaces(array(
+        // ...
+        'Zenstruck' => __DIR__.'/../vendor/bundles',
+    ));
+    ```
+    
+3. Finally, enable the bundle in the kernel:
+
+    ```php
+    <?php
+    // app/AppKernel.php
+    
+    public function registerBundles()
+    {
+        $bundles = array(
+            // ...
+            new Zenstruck\Bundle\MobileBundle\ZenstruckMobileBundle(),
+        );
+    }
+    ```    
+
 ## Mobile Manager
 
 The ``zenstruck_mobile.manager`` service stores whether or not the current request
