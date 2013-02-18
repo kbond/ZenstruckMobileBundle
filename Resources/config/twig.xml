@@ -12,8 +12,8 @@
         <service id="templating.engine.twig" class="%zenstruck_mobile.templating.engine.twig.class%" public="false">
             <argument type="service" id="twig" />
             <argument type="service" id="templating.name_parser" />
+            <argument type="service" id="templating.locator" />
             <argument type="service" id="zenstruck_mobile.manager" />
-            <argument type="service" id="templating.globals" />
         </service>
     </services>
 </container>
