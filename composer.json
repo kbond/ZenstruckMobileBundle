@@ -12,10 +12,15 @@
         }
     ],
     "require": {
-        "symfony/framework-bundle": "2.*"
+        "symfony/framework-bundle": "2.0.*"
     },
     "autoload": {
         "psr-0": { "Zenstruck\\Bundle\\MobileBundle": "" }
     },
-    "target-dir": "Zenstruck/Bundle/MobileBundle"
+    "target-dir": "Zenstruck/Bundle/MobileBundle",
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        }
+    }
 }

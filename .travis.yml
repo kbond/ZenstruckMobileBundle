@@ -4,8 +4,4 @@ php:
   - 5.3
   - 5.4
 
-env:
-  - SYMFONY_VERSION=origin/2.0
-  - SYMFONY_VERSION=origin/master
-
-before_script: php vendor/vendors.php
+before_script: composer dump-autoload

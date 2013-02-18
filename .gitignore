@@ -5,4 +5,3 @@ catalog.xml
 .idea
 
 vendor/*
-!vendor/vendors.php
