@@ -3,7 +3,6 @@
 namespace Zenstruck\Bundle\MobileBundle\Twig;
 
 use Symfony\Bundle\TwigBundle\TwigEngine as BaseTwigEngine;
-use Symfony\Bundle\FrameworkBundle\Templating\GlobalVariables;
 use Symfony\Component\Templating\TemplateNameParserInterface;
 use Symfony\Component\Config\FileLocatorInterface;
 use Zenstruck\Bundle\MobileBundle\Manager\MobileManager;

@@ -2,7 +2,6 @@
 
 namespace Zenstruck\Bundle\MobileBundle\Twig\Extension;
 
-use Zenstruck\Bundle\MobileBundle\Manager\MobileManager;
 use Symfony\Component\DependencyInjection\Container;
 
 /**
